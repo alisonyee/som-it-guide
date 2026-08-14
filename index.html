@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide to IT at Yale SOM — Orientation 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Yale 2024 typeface — licensed font, used here under Yale's Typeface Usage Agreement
+     (Yale University projects only; do not redistribute outside Yale). */
+  @font-face{
+    font-family:'Yale 2024';
+    src:url('assets/fonts/Yale2024-Roman.woff') format('woff'),
+        url('assets/fonts/Yale2024-Roman.otf') format('opentype');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Yale 2024';
+    src:url('assets/fonts/Yale2024-Bold.woff') format('woff'),
+        url('assets/fonts/Yale2024-Bold.otf') format('opentype');
+    font-weight:600 700; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Yale 2024';
+    src:url('assets/fonts/Yale2024-Italic.woff') format('woff'),
+        url('assets/fonts/Yale2024-Italic.otf') format('opentype');
+    font-weight:400; font-style:italic; font-display:swap;
+  }
+  @font-face{
+    font-family:'Yale 2024';
+    src:url('assets/fonts/Yale2024-BoldItalic.woff') format('woff'),
+        url('assets/fonts/Yale2024-BoldItalic.otf') format('opentype');
+    font-weight:600 700; font-style:italic; font-display:swap;
+  }
+</style>
+<style>
+  :root{
+    --bg:#F9F9F9;
+    --paper:#FFFFFF;
+    --ink:#222222;
+    --ink-soft:#4A4A4A;
+    --ink-faint:#978D85;
+    --yale:#00356B;
+    --yale-deep:#00203F;
+    --yale-mid:#286DC0;
+    --yale-mist:#EAF0F6;
+    --accent:#4A4A4A;
+    --accent-ink:#4A4A4A;
+    --accent-soft:#ECECEC;
+    --accent-hero:#DDDDDD;
+    --warn-soft:#F6E7E1;
+    --warn-border:#E9CFC4;
+    --warn-ink:#6E3221;
+    --line:#DDDDDD;
+    --line-strong:#C7C7C7;
+    --radius:14px;
+    --maxw:760px;
+    --font-display:'Yale 2024',Georgia,'Times New Roman',serif;
+    --font-body:'Yale 2024',Georgia,'Times New Roman',serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:var(--yale); text-decoration-color:rgba(0,53,107,0.35); text-underline-offset:2px; }
+  a:hover{ text-decoration-color:var(--yale); }
+  a:focus-visible, button:focus-visible, .chip:focus-visible, summary:focus-visible{
+    outline:2px solid var(--yale); outline-offset:2px; border-radius:4px;
+  }
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      radial-gradient(900px 420px at 85% -10%, rgba(185,143,30,0.14), transparent 60%),
+      linear-gradient(180deg, var(--yale-deep) 0%, var(--yale) 100%);
+    color:#F4F1E8;
+    padding:64px 0 46px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px);
+    background-size:22px 22px;
+    opacity:0.35;
+    pointer-events:none;
+  }
+  .hero .wrap{ position:relative; }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:#CBD9E8;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent-hero); display:inline-block; }
+  h1.title{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(38px, 6vw, 56px);
+    line-height:1.04;
+    margin:0 0 18px;
+    letter-spacing:-0.01em;
+  }
+  h1.title em{ font-style:italic; font-weight:500; color:var(--accent-hero); }
+  .hero p.sub{
+    font-size:17px;
+    max-width:560px;
+    color:#DCE6F0;
+    margin:0 0 6px;
+  }
+  .hero .meta{
+    margin-top:26px;
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:#9FB4CB;
+  }
+
+  /* ---------- Milestone filter bar (signature element) ---------- */
+  .filterbar{
+    position:sticky; top:0; z-index:40;
+    background:rgba(250,247,240,0.92);
+    backdrop-filter:saturate(150%) blur(8px);
+    border-bottom:1px solid var(--line-strong);
+  }
+  .filterbar-inner{
+    max-width:var(--maxw); margin:0 auto; padding:12px 24px;
+    display:flex; gap:8px; align-items:center; overflow-x:auto;
+    scrollbar-width:thin;
+  }
+  .filterbar-label{
+    font-family:var(--font-mono);
+    font-size:11px; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--ink-faint); white-space:nowrap; margin-right:2px;
+  }
+  .chip{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    white-space:nowrap;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid var(--line-strong);
+    background:var(--paper);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease, border-color .15s ease, transform .1s ease;
+  }
+  .chip:hover{ border-color:var(--yale); color:var(--yale); }
+  .chip.active{
+    background:var(--yale); border-color:var(--yale); color:#fff;
+  }
+  .chip:active{ transform:scale(0.97); }
+
+  main{ padding-bottom:80px; }
+
+  /* ---------- Milestone map ---------- */
+  .msection{ padding:40px 0 8px; }
+  .msection h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 6px;
+  }
+  .msection p.lead{ color:var(--ink-soft); margin:0 0 22px; font-size:15px; }
+
+  .mtable{ width:100%; border-collapse:collapse; font-size:14px; }
+  .mtable th, .mtable td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .mtable th{
+    font-family:var(--font-mono);
+    font-size:11px; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--ink-faint); font-weight:500; border-bottom:1px solid var(--line-strong);
+  }
+  .mtable td.tag{ font-family:var(--font-mono); color:var(--yale); font-weight:500; }
+  .mtable tr:last-child td{ border-bottom:none; }
+
+  /* ---------- Sections ---------- */
+  section.card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    margin:22px 0;
+    padding:30px 30px 26px;
+    box-shadow:0 1px 2px rgba(28,27,25,0.03);
+    transition:opacity .25s ease, filter .25s ease;
+    scroll-margin-top:76px;
+  }
+  section.card.dimmed{ opacity:0.32; filter:saturate(0.6); }
+
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:4px; flex-wrap:wrap; }
+  .sec-num{
+    font-family:var(--font-display);
+    font-weight:600; font-style:italic;
+    font-size:15px; color:var(--accent-ink);
+    white-space:nowrap;
+  }
+  h2.sec-title{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:23px;
+    margin:0;
+    color:var(--yale-deep);
+    letter-spacing:-0.005em;
+  }
+  .tagrow{ margin:10px 0 18px; display:flex; gap:6px; flex-wrap:wrap; }
+  .tag{
+    font-family:var(--font-mono);
+    font-size:11px;
+    padding:3px 9px;
+    border-radius:999px;
+    background:var(--yale-mist);
+    color:var(--yale);
+    border:1px solid #D6E3EE;
+  }
+
+  h3.sub{
+    font-family:var(--font-display);
+    font-weight:600; font-size:17px;
+    margin:24px 0 8px;
+    color:var(--ink);
+  }
+  h3.sub:first-of-type{ margin-top:16px; }
+  p{ margin:0 0 14px; color:var(--ink); }
+  p.lede{ color:var(--ink-soft); font-size:15.5px; }
+
+  ol.steps{ margin:0 0 16px; padding-left:0; list-style:none; counter-reset:step; }
+  ol.steps li{
+    counter-increment:step;
+    position:relative;
+    padding:2px 0 2px 34px;
+    margin-bottom:10px;
+    font-size:15px;
+  }
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute; left:0; top:1px;
+    width:22px; height:22px;
+    background:var(--yale-mist);
+    color:var(--yale);
+    border-radius:6px;
+    font-family:var(--font-mono);
+    font-size:12px; font-weight:500;
+    display:flex; align-items:center; justify-content:center;
+  }
+  ul.bullets{ margin:0 0 16px; padding-left:0; list-style:none; }
+  ul.bullets li{
+    position:relative; padding-left:18px; margin-bottom:9px; font-size:15px;
+  }
+  ul.bullets li::before{
+    content:"–"; position:absolute; left:0; color:var(--ink-faint);
+  }
+
+  .callout{
+    display:flex; gap:10px; align-items:flex-start;
+    background:var(--warn-soft);
+    border:1px solid var(--warn-border);
+    color:var(--warn-ink);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:14px;
+    margin:6px 0 18px;
+  }
+  .callout .ic{ font-size:16px; line-height:1.3; }
+  .callout.accent{ background:var(--accent-soft); border-color:#C7C7C7; color:#333333; }
+
+  code, .kbd{
+    font-family:var(--font-mono);
+    background:var(--yale-mist);
+    padding:1px 6px;
+    border-radius:4px;
+    font-size:0.9em;
+    color:var(--yale-deep);
+  }
+
+  /* ---------- Screenshot strip + lightbox ---------- */
+  .shots{
+    display:flex; gap:10px; overflow-x:auto; padding:6px 2px 14px;
+    margin:6px 0 18px;
+    scrollbar-width:thin;
+  }
+  .shots img{
+    height:180px; width:auto;
+    border-radius:8px;
+    border:1px solid var(--line-strong);
+    cursor:zoom-in;
+    flex-shrink:0;
+    background:#f1efe6;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .shots img:hover{ transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,53,107,0.14); }
+  .shots-label{
+    font-family:var(--font-mono); font-size:11px; color:var(--ink-faint);
+    text-transform:uppercase; letter-spacing:.06em; margin:14px 0 -4px;
+  }
+
+  #lightbox{
+    position:fixed; inset:0; background:rgba(10,14,20,0.85);
+    display:none; align-items:center; justify-content:center;
+    z-index:100; padding:40px; cursor:zoom-out;
+  }
+  #lightbox.open{ display:flex; }
+  #lightbox img{ max-width:100%; max-height:100%; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+
+  details.more{
+    margin:6px 0 18px;
+    border:1px solid var(--line-strong);
+    border-radius:10px;
+    background:#FBFAF5;
+  }
+  details.more summary{
+    cursor:pointer; padding:12px 16px; font-size:14px; font-weight:500;
+    color:var(--yale); list-style:none; display:flex; align-items:center; gap:8px;
+  }
+  details.more summary::-webkit-details-marker{ display:none; }
+  details.more summary::before{ content:"+"; font-family:var(--font-mono); font-weight:600; }
+  details.more[open] summary::before{ content:"–"; }
+  details.more .inner{ padding:0 16px 16px; }
+
+  /* ---------- Bookmarks table ---------- */
+  .linkgrid{
+    display:grid; grid-template-columns:1fr 1fr; gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden;
+  }
+  .linkgrid a{
+    display:block; background:var(--paper); padding:12px 14px;
+    font-size:14px; text-decoration:none;
+  }
+  .linkgrid a:hover{ background:var(--yale-mist); }
+  .linkgrid a .name{ display:block; color:var(--ink); font-weight:500; margin-bottom:2px; }
+  .linkgrid a .url{ display:block; font-family:var(--font-mono); font-size:11.5px; color:var(--ink-faint); }
+  @media (max-width:560px){ .linkgrid{ grid-template-columns:1fr; } }
+
+  /* ---------- Contact cards ---------- */
+  .contact-grid{ display:grid; gap:12px; margin:6px 0 20px; }
+  .contact-card{
+    border:1px solid var(--line-strong); border-radius:10px; padding:14px 16px; background:#FBFAF5;
+  }
+  .contact-card .who{ font-weight:600; margin-bottom:4px; }
+  .contact-card .how{ font-family:var(--font-mono); font-size:13px; color:var(--yale-deep); }
+
+  footer{
+    text-align:center; padding:50px 24px 70px;
+    color:var(--ink-faint); font-size:13px;
+  }
+  footer a{ color:var(--ink-soft); }
+
+  .appendix{ font-size:13.5px; color:var(--ink-soft); }
+  .appendix h3{ font-size:14px; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); margin:20px 0 8px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Yale School of Management · Orientation 2026</div>
+    <h1 class="title">Guide to <em>IT</em> at Yale SOM</h1>
+    <p class="sub">Welcome aboard! We're so glad you're here. Getting your accounts, apps, and tools set up can be confusing, so this pulls everything into one place to get you started.</p>
+    <div class="meta">Created by Alison Yee. Questions/Edits/Comments: reach out to <a href="mailto:alison.yee@yale.edu" style="color:#CBD9E8;">alison.yee@yale.edu</a> or via Slack.</div>
+  </div>
+</header>
+
+<nav class="filterbar" aria-label="Filter by orientation milestone">
+  <div class="filterbar-inner" id="filterbar">
+    <span class="filterbar-label">View by moment:</span>
+    <button class="chip active" data-m="all">All</button>
+    <button class="chip" data-m="M0">Before You Arrive</button>
+    <button class="chip" data-m="M1">Orientation Week</button>
+    <button class="chip" data-m="M2">Ongoing</button>
+    <button class="chip" data-m="M3">Recruiting</button>
+    <button class="chip" data-m="M4">Midterms &amp; Finals</button>
+    <button class="chip" data-m="M5">Fall Bidding</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <div class="msection">
+    <h2>Milestone map</h2>
+    <table class="mtable">
+      <thead><tr><th>#</th><th>Milestone</th><th>What it covers</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td class="tag">M0</td><td>Before You Arrive</td><td>NetID, Duo, MTA, PWG, LiveSafe/shuttle, Amazon Lockers, travel-to-New-Haven link</td><td>Pre-travel needs</td></tr>
+        <tr><td class="tag">M1</td><td>Orientation Week</td><td>Office install, CampusGroups + Yale Connect, Slack transition, calendar sync, ID pickup</td><td>Concentrated account setup</td></tr>
+        <tr><td class="tag">M2</td><td>Ongoing / Ambient</td><td>Outlook, OneDrive/SharePoint, Zoom, printing, bookmarks, help contacts</td><td>Used all year</td></tr>
+        <tr><td class="tag">M3</td><td>Recruiting Season</td><td>EMS interview rooms + etiquette, VPN, Outlook/OneDrive for materials</td><td>Spikes during recruiting</td></tr>
+        <tr><td class="tag">M4</td><td>Midterms &amp; Finals</td><td>Printing, EMS breakout rooms, IT emergency line</td><td>Space/urgency spike</td></tr>
+        <tr><td class="tag">M5</td><td>Fall Bidding</td><td>Bidding site link, enrollment policy link</td><td>MBA1 spring-course bidding, late Nov</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===================== SECTION 1: DAY 1 CHECKLIST ===================== -->
+  <section class="card" data-m="M0 M1" id="s1">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Day 1 Setup Checklist</h2></div>
+    <ol class="steps">
+      <li><strong>Activate your NetID.</strong> This is the single credential that unlocks almost every Yale system (email, Canvas, CampusGroups, printing, room booking, Wi-Fi). If you haven't activated it yet, do this first.</li>
+      <li><strong>Set up Duo.</strong> Yale requires two-factor authentication on top of your NetID password for most logins. Register your first device now; most systems below will prompt you for a Duo approval the first time you log in.</li>
+      <li><strong>Log into Outlook.</strong> This is where most official Yale and SOM communications will land going forward. Check for a welcome email from your Orientation Leader the week of August 10!</li>
+      <li><strong>Install Office.</strong> Not urgent, but while you're here, why not?</li>
+      <li><strong>Join CampusGroups.</strong> Most SOM and club events will live here. Download the mobile app, though there's a web version too.</li>
+      <li><strong>Join Slack.</strong> Before July, most students were invited to a temporary admitted-students workspace before being moved to the official SOM Slack workspace. Join the official one if you haven't already. Consider toggling notifications so the pings don't overwhelm you.</li>
+      <li><strong>Set up PaperCut.</strong> You don't need funds loaded on day one, but creating the account now means you're not scrambling to print your cheat sheet before your first midterm.</li>
+      <li><strong>Bookmark common links.</strong> You'll be navigating the same handful of links over and over during your first few weeks. See <a href="#s11">Section 11</a>.</li>
+    </ol>
+  </section>
+
+  <!-- ===================== SECTION 2: ACCOUNTS ===================== -->
+  <section class="card" data-m="M0 M3" id="s2">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Accounts, Login &amp; Security</h2></div>
+
+    <h3 class="sub">NetID &amp; password</h3>
+    <p>Your NetID is your master login for nearly every Yale system — email, Canvas, CampusGroups, printing, EMS, and more. If you haven't activated it yet, do this as the first step!</p>
+
+    <h3 class="sub">YaleID &amp; UPI</h3>
+    <p>These are different from your NetID — a YaleID is a separate identification number, and a UPI is your Universal Person Identifier. You'll be able to pick up your student ID card starting <strong>Friday, August 14</strong>.</p>
+
+    <h3 class="sub">Duo (two-factor authentication)</h3>
+    <p>Yale requires Duo on top of your NetID password for most systems.</p>
+    <ul class="bullets">
+      <li>Registering your first device: <a href="https://yalesom.atlassian.net/wiki/spaces/SC/pages/42308376/How+to+Opt-in+to+DUO+Everywhere+and+Register+your+First+Device" target="_blank" rel="noopener">How to opt in to Duo Everywhere</a></li>
+      <li>New phone, same number: <a href="https://yalesom.atlassian.net/wiki/spaces/SC/pages/42307471/How+to+Activate+DUO+on+a+new+mobile+device+with+the+same+phone+number" target="_blank" rel="noopener">Activate Duo on a new device</a></li>
+      <li>iOS blank/gray screen: <a href="https://yalesom.atlassian.net/wiki/spaces/SC/pages/42309222/Duo+login+box+blank+gray+on+iOS" target="_blank" rel="noopener">Fix guide</a></li>
+    </ul>
+
+    <h3 class="sub">VPN (Cisco AnyConnect)</h3>
+    <p>To access some specific resources (including the course auction when bidding for classes off-campus), download the Cisco AnyConnect VPN. <a href="https://yalesom.atlassian.net/wiki/spaces/SC/pages/42304499/Yale+Cisco+AnyConnect+VPN+Access" target="_blank" rel="noopener">Setup instructions here</a> — use your NetID to log in.</p>
+  </section>
+
+  <!-- ===================== SECTION 3: EMAIL/OFFICE/STORAGE ===================== -->
+  <section class="card" data-m="M1 M2 M3" id="s3">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Email, Office &amp; File Storage</h2></div>
+
+    <h3 class="sub">Install Outlook</h3>
+    <p><strong>Desktop (Windows/Mac):</strong></p>
+    <ol class="steps">
+      <li>Open Outlook</li>
+      <li>Select "Add Account"</li>
+      <li>Enter your Yale email and NetID password and approve the Duo push when prompted</li>
+    </ol>
+    <p><strong>Web:</strong> go to <code>outlook.office365.com</code> and sign in with your Yale email and NetID password.</p>
+    <p><strong>Mobile:</strong></p>
+    <ol class="steps">
+      <li>Download the Outlook app</li>
+      <li>Tap "Add Account" then "Office 365"</li>
+      <li>Enter your Yale email and NetID password</li>
+    </ol>
+
+    <h3 class="sub">Install Office</h3>
+    <ol class="steps">
+      <li>Go to the Office Apps &amp; Downloads page on Microsoft 365 (must be logged into Yale Outlook)</li>
+      <li>Click "Install Office" — download on up to 5 devices (PCs, Macs, tablets, phones)</li>
+      <li>Open the installer from your Downloads once it finishes</li>
+      <li>Accept the prompt to allow changes to your device</li>
+      <li>Log in with your Yale Office 365 credentials (standard Yale password) to finish</li>
+    </ol>
+    <div class="shots-label">Screenshots</div>
+    <div class="shots" data-lightbox-group>
+      <img src="assets/image8.jpg" alt="Office apps and downloads page on Microsoft 365">
+      <img src="assets/image5.jpg" alt="Install Office button on Microsoft 365 account page">
+      <img src="assets/image39.jpg" alt="Office suite download in progress">
+      <img src="assets/image4.jpg" alt="Office installer opening">
+    </div>
+
+    <h3 class="sub">Navigating OneDrive / SharePoint</h3>
+    <p><strong>SharePoint</strong> is a shared-file platform, best for learning team documents or club-related tasks that need group-level access separate from your personal OneDrive. Access it at <code>yaleedu.sharepoint.com</code>.</p>
+    <p><strong>OneDrive</strong> is your personal cloud storage, free with your Yale Office 365 account. Save files there to reach them from any device and keep an automatic backup of your work. Access it by logging into <code>login.microsoftonline.com</code> with your Yale email, then selecting OneDrive from the app launcher (top-left grid icon).</p>
+  </section>
+
+  <!-- ===================== SECTION 4: BIDDING ===================== -->
+  <section class="card" data-m="M5" id="s4">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Course Bidding</h2></div>
+    <p>MBA1s enroll in elective spring courses via the <a href="https://som.yale.edu/myportal/courses/course-auction" target="_blank" rel="noopener">course auction</a>. More information will become available through email in late fall semester.</p>
+  </section>
+
+  <!-- ===================== SECTION 5: CAMPUS COMMUNITY ===================== -->
+  <section class="card" data-m="M1 M2" id="s5">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Campus Community Platforms</h2></div>
+
+    <h3 class="sub">CampusGroups</h3>
+    <p class="lede">Your go-to page for most SOM social and guest-speaker events — everything from the annual Business &amp; Society musical to weekly club meetings to guest talks lives here, plus club sites.</p>
+    <ol class="steps">
+      <li>Go to the CampusGroups login page and sign in with your Yale NetID</li>
+      <li>Download the app, select the "Yale School of Management" hub, and join the SOM Community Hub + Orientation channel with your Yale email</li>
+      <li>Tap your account icon to add a profile photo and short bio</li>
+      <li>Browse events on the Calendar/Events tab; click one and hit Register/RSVP</li>
+      <li>Paid events (formals, Internship Fund Auction Night, Business &amp; Society Musical) prompt for payment on the registration page; full events offer an automatic waitlist</li>
+      <li>If you can no longer make an event, please unregister — it frees your spot for someone else (especially for free events)</li>
+    </ol>
+    <div class="shots-label">Screenshots</div>
+    <div class="shots" data-lightbox-group>
+      <img src="assets/image40.jpg" alt="CampusGroups login page">
+      <img src="assets/image3.jpg" alt="CampusGroups hub selection">
+      <img src="assets/image44.jpg" alt="CampusGroups profile setup">
+      <img src="assets/image37.jpg" alt="CampusGroups events calendar">
+      <img src="assets/image21.jpg" alt="CampusGroups event registration">
+      <img src="assets/image9.jpg" alt="CampusGroups event RSVP">
+      <img src="assets/image41.jpg" alt="CampusGroups waitlist">
+    </div>
+
+    <h3 class="sub">Syncing events to your calendar</h3>
+    <ol class="steps">
+      <li>Log into <code>groups.som.yale.edu</code> with your NetID</li>
+      <li>Scroll to the bottom of your dashboard to "Synchronize my Events"</li>
+      <li>Optional: check "Also synchronize my YaleSOM classes"</li>
+      <li>Click "Enable Synchronization" (or "Manage Settings" if already connected)</li>
+      <li>Choose Google Calendar or Office 365, log in, and click Accept on the permissions prompt</li>
+    </ol>
+    <div class="callout accent"><span class="ic">⏳</span> Sync can lag 48–72 hrs during peak weeks.</div>
+    <div class="shots" data-lightbox-group>
+      <img src="assets/image15.jpg" alt="Synchronize my events setting">
+      <img src="assets/image26.jpg" alt="Calendar sync permissions prompt">
+      <img src="assets/image7.jpg" alt="Calendar sync confirmation">
+    </div>
+
+    <h3 class="sub">Slack</h3>
+    <p>SOM relies on Slack heavily to make announcements about social events, club events, and student government updates. Peruse channels, but a few to know:</p>
+    <ul class="bullets">
+      <li>School-wide channels (<code>#som-all-programs</code>)</li>
+      <li>MBA-wide channel (<code>#4055-mba</code>)</li>
+      <li>Cohort channels (e.g. <code>#2028-gold</code>): formal cohort-wide announcements are often posted here</li>
+      <li><code>#som-marketplace</code>, <code>#free-food</code></li>
+    </ul>
+    <details class="more">
+      <summary>A few things to keep in mind</summary>
+      <div class="inner">
+        <ul class="bullets">
+          <li><strong>Etiquette:</strong> react generously and keep posts kind — your posts and DMs are in a school-wide workplace</li>
+          <li><strong>Notifications:</strong> manage notifications and mute channels as you see fit</li>
+          <li><strong>Search:</strong> use the search bar to look across Slack or within specific channels; check out <code>#som-faq</code> and <code>#som-bidding</code></li>
+          <li><strong>Sections:</strong> use the "Sections" feature to group and condense channels by your own priorities</li>
+        </ul>
+      </div>
+    </details>
+    <p style="margin-top:8px;"><a href="https://yalesom.atlassian.net/wiki/spaces/SC/pages/42306428/Getting+Started+in+Slack" target="_blank" rel="noopener">More details on getting started in Slack →</a></p>
+
+    <h3 class="sub">Yale Connect</h3>
+    <p>In addition to CampusGroups (for SOM events), check out <a href="https://yaleconnect.yale.edu/home_login" target="_blank" rel="noopener">Yale Connect</a> (web and mobile app) for events outside SOM across Yale campus.</p>
+  </section>
+
+  <!-- ===================== SECTION 6: PRINTING ===================== -->
+  <section class="card" data-m="M2 M4" id="s6">
+    <div class="sec-head"><span class="sec-num">06</span><h2 class="sec-title">Printing</h2></div>
+    <p>Print to one shared queue, then release the job at whichever compatible printer you're standing at — including many Yale printers outside SOM. Nothing prints until you release it. <a href="https://blueprint.yale.edu/student-printing/quick-start" target="_blank" rel="noopener">Quick-start guide →</a></p>
+
+    <h3 class="sub">Add funds</h3>
+    <ol class="steps">
+      <li>Go to the <a href="https://blueprint.yale.edu/webprint" target="_blank" rel="noopener">PaperCut Web Print portal</a> and log in with your NetID/password</li>
+      <li>On the dashboard, click "Adding Funds" (you may need to log in again)</li>
+      <li>Click "Add Funds" under the Yale NetID section</li>
+      <li>Pick an amount ($5–$20 preset, or "Other" up to $99)</li>
+      <li>Choose a payment method and submit</li>
+    </ol>
+    <div class="callout accent"><span class="ic">💵</span> Balances under $5 aren't refundable, but can be transferred to another student.</div>
+
+    <h3 class="sub">Submit a print job</h3>
+    <ol class="steps">
+      <li>From the PaperCut homepage, click "Web Print"</li>
+      <li>Click "Submit a Job"</li>
+      <li>Select your target printer/queue</li>
+      <li>Set your number of copies</li>
+      <li>Upload your file(s) and submit</li>
+    </ol>
+
+    <h3 class="sub">Release your print</h3>
+    <ol class="steps">
+      <li>Once your job shows "Held in a queue," walk to any compatible printer</li>
+      <li>Tap your ID card on the reader, or log in manually with your NetID, to release it</li>
+    </ol>
+    <div class="shots-label">Screenshots</div>
+    <div class="shots" data-lightbox-group>
+      <img src="assets/image25.jpg" alt="PaperCut login">
+      <img src="assets/image42.jpg" alt="PaperCut adding funds">
+      <img src="assets/image6.jpg" alt="PaperCut fund amount selection">
+      <img src="assets/image24.jpg" alt="PaperCut payment">
+      <img src="assets/image30.jpg" alt="PaperCut web print submit">
+      <img src="assets/image33.jpg" alt="PaperCut printer queue selection">
+      <img src="assets/image32.jpg" alt="PaperCut copies and upload">
+      <img src="assets/image2.jpg" alt="PaperCut job held in queue">
+      <img src="assets/image19.jpg" alt="Releasing a print job at the printer">
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 7: ROOM BOOKING ===================== -->
+  <section class="card" data-m="M2 M3 M4" id="s7">
+    <div class="sec-head"><span class="sec-num">07</span><h2 class="sec-title">Room &amp; Space Booking</h2></div>
+    <p>EMS lets students book classrooms, breakout rooms, and interview rooms at Evans Hall.</p>
+    <ul class="bullets">
+      <li><strong>Breakout rooms:</strong> located on the 2nd and 4th floors, intended for learning teams, leadership club meetings, case team practice, and other group use. Not intended for individual studying.</li>
+      <li><strong>Interview rooms:</strong> intended for formal recruiting only; located on the 1st floor.</li>
+    </ul>
+
+    <h3 class="sub">Booking flow</h3>
+    <ol class="steps">
+      <li>Go to the <a href="https://yalesom.emscloudservice.com/web/Default.aspx" target="_blank" rel="noopener">Yale SOM EMS website</a>, scroll to the bottom, and click "Sign In"</li>
+      <li>Log in with your NetID</li>
+      <li>Under "My Reservation Templates," pick a room category and click "Book Now"</li>
+      <li>Enter your date, start time, and end time; click Search</li>
+      <li>Pick an available room (shown with a green + and its capacity) and click the +</li>
+      <li>In the "Attendance &amp; Setup Type" pop-up, leave the default and click "Add Room"</li>
+      <li>Click "Next Step"</li>
+      <li>Fill in event name, event type, your group/cohort, and contact name/email</li>
+      <li>Click "Create Reservation"</li>
+    </ol>
+
+    <h3 class="sub">Managing &amp; checking in</h3>
+    <ul class="bullets">
+      <li>View or cancel bookings under "My Events"</li>
+    </ul>
+    <div class="callout"><span class="ic">🚪</span> Breakout and interview rooms require check-in (at the door or via email link) within 10 minutes of your start time, or the room releases automatically.</div>
+    <div class="shots-label">Screenshots</div>
+    <div class="shots" data-lightbox-group>
+      <img src="assets/image10.jpg" alt="EMS sign in">
+      <img src="assets/image18.jpg" alt="EMS NetID login">
+      <img src="assets/image28.jpg" alt="EMS reservation templates">
+      <img src="assets/image27.jpg" alt="EMS room category selection">
+      <img src="assets/image29.jpg" alt="EMS date and time search">
+      <img src="assets/image20.jpg" alt="EMS available room selection">
+      <img src="assets/image36.jpg" alt="EMS attendance and setup type">
+      <img src="assets/image35.jpg" alt="EMS next step">
+      <img src="assets/image14.jpg" alt="EMS event details form">
+      <img src="assets/image1.jpg" alt="EMS create reservation">
+      <img src="assets/image16.jpg" alt="EMS my events">
+      <img src="assets/image38.jpg" alt="EMS check-in">
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 8: VIDEO CONFERENCING ===================== -->
+  <section class="card" data-m="M1 M2 M3" id="s8">
+    <div class="sec-head"><span class="sec-num">08</span><h2 class="sec-title">Video Conferencing</h2></div>
+    <ul class="bullets">
+      <li><strong>Zoom:</strong> install from Yale Software Library and sign up with your Yale email</li>
+      <li>SOM-branded backgrounds <a href="https://yalesom.atlassian.net/wiki/spaces/SC/pages/42308184/Yale+SOM+zoom+background" target="_blank" rel="noopener">available here</a></li>
+      <li>Click the gear icon in the Zoom app to confirm your Yale email shows as default before joining meetings</li>
+    </ul>
+  </section>
+
+  <!-- ===================== SECTION 9: IT EQUIPMENT ===================== -->
+  <section class="card" data-m="M2" id="s9">
+    <div class="sec-head"><span class="sec-num">09</span><h2 class="sec-title">IT Equipment &amp; Rentals</h2></div>
+    <ul class="bullets">
+      <li>Bass Media Equipment requires an active Yale ID</li>
+      <li>IT Rentals: students borrow on the honor code and may need to sign a tracking form; email <a href="mailto:SOMIT@yale.edu">SOMIT@yale.edu</a> for anything beyond what's available</li>
+    </ul>
+  </section>
+
+  <!-- ===================== SECTION 10: CAMPUS LIFE & TRANSIT ===================== -->
+  <section class="card" data-m="M0" id="s10">
+    <div class="sec-head"><span class="sec-num">10</span><h2 class="sec-title">Campus Life &amp; Transit Apps</h2></div>
+
+    <h3 class="sub">Yale Rec App — PWG access before your ID card arrives</h3>
+    <ol class="steps">
+      <li>Search the App Store/Google Play for "Yale Campus Recreation" and install it</li>
+      <li>Open the app; tap the barcode icon labeled "Yale Rec ID" in the top-left corner</li>
+      <li>Tap "Yale NetID (CAS) User Login"</li>
+      <li>Enter your NetID and password; approve the Duo push notification on your phone</li>
+      <li>Tap "Yes, this is my device" to skip repeat logins</li>
+      <li>At the PWG check-in counter, show/scan the barcode on your screen</li>
+    </ol>
+    <div class="shots-label">Screenshots</div>
+    <div class="shots" data-lightbox-group>
+      <img src="assets/image31.jpg" alt="Yale Campus Recreation app">
+      <img src="assets/image46.jpg" alt="Yale Rec ID barcode">
+      <img src="assets/image11.jpg" alt="Yale NetID CAS login">
+    </div>
+
+    <h3 class="sub">MTA TrainTime app — Metro-North tickets</h3>
+    <p><strong>Method A (by itinerary):</strong></p>
+    <ol class="steps">
+      <li>Open the Trips tab</li>
+      <li>Set origin/destination (e.g. Grand Central → New Haven)</li>
+      <li>Tap the train you want</li>
+      <li>Tap "Buy" in trip details</li>
+    </ol>
+    <p><strong>Method B (by ticket type):</strong></p>
+    <ol class="steps">
+      <li>Open the Tickets tab</li>
+      <li>Tap "Buy +"</li>
+      <li>Choose trip type (one way, round trip, ten-trip)</li>
+      <li>Select Peak/Off-Peak and check out</li>
+    </ol>
+    <div class="callout"><span class="ic">⚠️</span> Don't activate your ticket until you're on the train — activation can't be reversed. A peak ticket works for a peak-time train; an off-peak ticket on a peak-time train may require you to purchase again. Bikes/PEVs allowed space-permitting.</div>
+    <div class="shots-label">Screenshots</div>
+    <div class="shots" data-lightbox-group>
+      <img src="assets/image34.jpg" alt="MTA TrainTime app">
+      <img src="assets/image12.jpg" alt="MTA trips tab">
+      <img src="assets/image45.jpg" alt="MTA train selection">
+      <img src="assets/image23.jpg" alt="MTA buy tickets">
+      <img src="assets/image43.jpg" alt="MTA ticket type selection">
+      <img src="assets/image22.jpg" alt="MTA peak off-peak selection">
+    </div>
+    <p style="margin-top:4px;">For other travel options, <a href="https://your.yale.edu/workplace-services/business-travel" target="_blank" rel="noopener">check out these resources</a>.</p>
+  </section>
+
+  <!-- ===================== SECTION 11: BOOKMARKS ===================== -->
+  <section class="card" data-m="M1 M2" id="s11">
+    <div class="sec-head"><span class="sec-num">11</span><h2 class="sec-title">Bookmarks — Master Links List</h2></div>
+    <div class="linkgrid">
+      <a href="https://portal.som.yale.edu" target="_blank" rel="noopener"><span class="name">Portal</span><span class="url">portal.som.yale.edu</span></a>
+      <a href="https://yub.yale.edu/" target="_blank" rel="noopener"><span class="name">Yale Hub</span><span class="url">yub.yale.edu</span></a>
+      <a href="https://student-accounts.yale.edu/yalepay" target="_blank" rel="noopener"><span class="name">YalePay</span><span class="url">student-accounts.yale.edu/yalepay</span></a>
+      <a href="https://yale.instructure.com" target="_blank" rel="noopener"><span class="name">Canvas</span><span class="url">yale.instructure.com</span></a>
+      <a href="https://groups.som.yale.edu" target="_blank" rel="noopener"><span class="name">CampusGroups</span><span class="url">groups.som.yale.edu</span></a>
+      <a href="https://groups.som.yale.edu/handbook/home/" target="_blank" rel="noopener"><span class="name">Student Handbook</span><span class="url">groups.som.yale.edu/handbook</span></a>
+      <a href="https://yaleconnect.yale.edu" target="_blank" rel="noopener"><span class="name">Yale Connect</span><span class="url">yaleconnect.yale.edu</span></a>
+      <a href="https://yalesom.emscloudservice.com/web" target="_blank" rel="noopener"><span class="name">EMS</span><span class="url">yalesom.emscloudservice.com</span></a>
+      <a href="https://software.yale.edu" target="_blank" rel="noopener"><span class="name">Software Library</span><span class="url">software.yale.edu</span></a>
+      <a href="https://reservations.yale.edu/bmec/" target="_blank" rel="noopener"><span class="name">Bass equipment requests</span><span class="url">reservations.yale.edu/bmec</span></a>
+      <a href="https://blueprint.yale.edu/downloads" target="_blank" rel="noopener"><span class="name">PaperCut</span><span class="url">blueprint.yale.edu/downloads</span></a>
+      <a href="https://yaleedu.sharepoint.com" target="_blank" rel="noopener"><span class="name">SharePoint</span><span class="url">yaleedu.sharepoint.com</span></a>
+      <a href="https://cdo.som.yale.edu" target="_blank" rel="noopener"><span class="name">CDO</span><span class="url">cdo.som.yale.edu</span></a>
+      <a href="https://som-yale.12twenty.com" target="_blank" rel="noopener"><span class="name">CMS</span><span class="url">som-yale.12twenty.com</span></a>
+      <a href="https://som.yale.edu/myportal/courses/course-auction" target="_blank" rel="noopener"><span class="name">Bidding site</span><span class="url">som.yale.edu/myportal/courses/course-auction</span></a>
+      <a href="https://studentsystems.yale.edu" target="_blank" rel="noopener"><span class="name">YaleID/UPI lookup</span><span class="url">studentsystems.yale.edu</span></a>
+      <a href="https://yalesom.atlassian.net/wiki" target="_blank" rel="noopener"><span class="name">Confluence / Atlassian</span><span class="url">yalesom.atlassian.net/wiki</span></a>
+      <a href="https://your.yale.edu/campus-essentials/community-safety/campus-safety-support/livesafe-app" target="_blank" rel="noopener"><span class="name">LiveSafe</span><span class="url">your.yale.edu · livesafe-app</span></a>
+      <a href="https://your.yale.edu/workplace-services/mail-shipping-receiving/campus-mail/parcel-lockers-amazon-and-others" target="_blank" rel="noopener"><span class="name">Amazon Lockers</span><span class="url">your.yale.edu · parcel-lockers</span></a>
+      <a href="https://your.yale.edu/workplace-services/business-travel/ground/airport-shuttle" target="_blank" rel="noopener"><span class="name">Yale Travel Management</span><span class="url">your.yale.edu · airport-shuttle</span></a>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 12: GETTING HELP ===================== -->
+  <section class="card" data-m="M2 M4" id="s12">
+    <div class="sec-head"><span class="sec-num">12</span><h2 class="sec-title">Getting Help — Contact &amp; Escalation</h2></div>
+
+    <p class="lede">For breakout room speakers not working, Outlook login issues, printing help, and similar IT/facilities questions:</p>
+    <div class="contact-grid">
+      <div class="contact-card"><div class="who">SOM IT (8am–5pm)</div><div class="how">203-432-7777 · somit@yale.edu · in-person in the basement</div></div>
+      <div class="contact-card"><div class="who">Yale IT 24/7 emergency</div><div class="how">Lockouts, hacked accounts, general IT issues — 203-432-9000 · yale.service-now.com</div></div>
+    </div>
+
+    <p class="lede">For facilities issues (mouse in the student lounge, broken outlet, spill in the hallway):</p>
+    <div class="contact-grid">
+      <div class="contact-card"><div class="who">Facilities (8am–5pm)</div><div class="how">somfacilities@yale.edu · urgent/immediate: 203-432-6000</div></div>
+    </div>
+
+    <p>For unique or emergency situations not covered above, or general feedback, escalate to the Tech/Ops Student Government Chair.</p>
+  </section>
+
+</main>
+
+<div id="lightbox"><img id="lightbox-img" src="" alt=""></div>
+
+<footer>
+  Guide to IT at Yale SOM · Orientation 2026<br>
+  Created by Alison Yee. Questions/Edits/Comments: reach out to <a href="mailto:alison.yee@yale.edu">alison.yee@yale.edu</a> or via Slack.
+</footer>
+
+<script>
+(function(){
+  // ---- Milestone filter ----
+  var chips = document.querySelectorAll('.chip');
+  var sections = document.querySelectorAll('section.card');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      var m = chip.getAttribute('data-m');
+      sections.forEach(function(sec){
+        if(m === 'all'){ sec.classList.remove('dimmed'); return; }
+        var tags = (sec.getAttribute('data-m') || '').split(' ');
+        if(tags.indexOf(m) !== -1){ sec.classList.remove('dimmed'); }
+        else{ sec.classList.add('dimmed'); }
+      });
+    });
+  });
+
+  // ---- Lightbox ----
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.shots img').forEach(function(img){
+    img.addEventListener('click', function(){
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+  lightbox.addEventListener('click', function(){ lightbox.classList.remove('open'); lightboxImg.src=''; });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ lightbox.classList.remove('open'); lightboxImg.src=''; }
+  });
+})();
+</script>
+
+</body>
+</html>
