@@ -201,7 +201,7 @@
     transition:opacity .25s ease, filter .25s ease;
     scroll-margin-top:76px;
   }
-  section.card.dimmed{ opacity:0.32; filter:saturate(0.6); }
+  section.card.dimmed{ display:none; }
 
   .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:4px; flex-wrap:wrap; }
   .sec-num{
@@ -362,6 +362,135 @@
 
   .appendix{ font-size:13.5px; color:var(--ink-soft); }
   .appendix h3{ font-size:14px; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); margin:20px 0 8px; }
+
+  /* ---------- Table of contents ---------- */
+  details.toc{
+    background:var(--paper);
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+    margin:18px 0 30px;
+  }
+  details.toc summary{
+    cursor:pointer;
+    padding:16px 20px;
+    font-family:var(--font-mono);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--yale);
+    font-weight:500;
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  details.toc summary::-webkit-details-marker{ display:none; }
+  details.toc summary::before{ content:"+"; font-weight:600; font-size:15px; font-family:var(--font-mono); }
+  details.toc[open] summary::before{ content:"–"; }
+  details.toc summary .label{ font-family:var(--font-body); font-size:15px; color:var(--ink); text-transform:none; letter-spacing:normal; }
+  .toc-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:4px 24px;
+    padding:0 20px 20px;
+  }
+  .toc-group{ padding-top:10px; border-top:1px solid var(--line); }
+  .toc-group a.toc-main{
+    display:block;
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--ink);
+    text-decoration:none;
+    padding:4px 0;
+  }
+  .toc-group a.toc-main:hover{ color:var(--yale); }
+  .toc-group a.toc-main .n{ font-family:var(--font-mono); color:var(--accent-ink); font-weight:500; margin-right:6px; font-size:12px; }
+  .toc-sub{ list-style:none; margin:0; padding:0; }
+  .toc-sub li{ margin:0; }
+  .toc-sub a{
+    display:block;
+    font-size:13px;
+    color:var(--ink-soft);
+    text-decoration:none;
+    padding:3px 0 3px 14px;
+    border-left:2px solid var(--line-strong);
+  }
+  .toc-sub a:hover{ color:var(--yale); border-left-color:var(--yale); }
+  @media (max-width:480px){
+    .toc-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- Desktop sticky sidebar ---------- */
+  .toc-sidebar{ display:none; }
+  .content-column{ min-width:0; }
+
+  @media (min-width:1180px){
+    main.wrap{
+      max-width:1040px;
+      display:grid;
+      grid-template-columns:230px 1fr;
+      gap:36px;
+      align-items:start;
+    }
+    .toc-sidebar{
+      display:block;
+      position:sticky;
+      top:88px;
+      max-height:calc(100vh - 110px);
+      overflow-y:auto;
+      padding-right:6px;
+    }
+    .toc-sidebar-label{
+      font-family:var(--font-mono);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      color:var(--ink-faint);
+      margin-bottom:12px;
+    }
+    .toc-sidebar .toc-group{ padding-top:10px; border-top:1px solid var(--line); margin-bottom:2px; }
+    .toc-sidebar .toc-group:first-child{ border-top:none; padding-top:0; }
+    .toc-sidebar a.toc-main{
+      display:block; font-weight:600; font-size:13.5px; color:var(--ink);
+      text-decoration:none; padding:3px 0;
+    }
+    .toc-sidebar a.toc-main:hover{ color:var(--yale); }
+    .toc-sidebar a.toc-main .n{ font-family:var(--font-mono); color:var(--accent-ink); font-weight:500; margin-right:5px; font-size:11px; }
+    .toc-sidebar .toc-sub a{ font-size:12px; padding:2px 0 2px 12px; }
+    /* the inline collapsible TOC becomes redundant once the sidebar is visible */
+    .content-column > details.toc{ display:none; }
+
+    .toc-sidebar-label{ display:flex; align-items:center; justify-content:space-between; }
+    .toc-toggle-btn{
+      background:none; border:1px solid var(--line-strong); border-radius:6px;
+      width:22px; height:22px; line-height:1; cursor:pointer;
+      color:var(--ink-soft); font-size:15px; font-family:var(--font-mono);
+      display:flex; align-items:center; justify-content:center; padding:0;
+    }
+    .toc-toggle-btn:hover{ border-color:var(--yale); color:var(--yale); }
+
+    .toc-reopen-btn{
+      display:none;
+      position:fixed;
+      top:96px;
+      left:24px;
+      z-index:35;
+      background:var(--paper);
+      border:1px solid var(--line-strong);
+      border-radius:8px;
+      padding:8px 12px;
+      font-family:var(--font-mono);
+      font-size:12px;
+      color:var(--yale);
+      cursor:pointer;
+      box-shadow:0 2px 8px rgba(0,53,107,0.10);
+    }
+    .toc-reopen-btn:hover{ border-color:var(--yale); background:var(--yale-mist); }
+
+    body.sidebar-collapsed main.wrap{ grid-template-columns:1fr; gap:0; max-width:800px; }
+    body.sidebar-collapsed .toc-sidebar{ display:none; }
+    body.sidebar-collapsed .toc-reopen-btn{ display:block; }
+  }
 </style>
 </head>
 <body>
@@ -389,9 +518,88 @@
 </nav>
 
 <main class="wrap">
+  <aside class="toc-sidebar">
+    <div class="toc-sidebar-label">On This Page<button id="toc-toggle" class="toc-toggle-btn" aria-label="Collapse table of contents" title="Collapse">‹</button></div>
+    <nav class="toc-sidebar-nav">
+      
+      <div class="toc-group">
+        <a class="toc-main" href="#s1"><span class="n">01</span>Day 1 Setup Checklist</a>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s2"><span class="n">02</span>Accounts, Login &amp; Security</a>
+        <ul class="toc-sub">
+          <li><a href="#s2-netid">NetID &amp; password</a></li>
+          <li><a href="#s2-yaleid">YaleID &amp; UPI</a></li>
+          <li><a href="#s2-duo">Duo (two-factor authentication)</a></li>
+          <li><a href="#s2-vpn">VPN (Cisco AnyConnect)</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s3"><span class="n">03</span>Email, Office &amp; File Storage</a>
+        <ul class="toc-sub">
+          <li><a href="#s3-outlook">Install Outlook</a></li>
+          <li><a href="#s3-office">Install Office</a></li>
+          <li><a href="#s3-onedrive">Navigating OneDrive / SharePoint</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s4"><span class="n">04</span>Course Bidding</a>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s5"><span class="n">05</span>Campus Community Platforms</a>
+        <ul class="toc-sub">
+          <li><a href="#s5-campusgroups">CampusGroups</a></li>
+          <li><a href="#s5-sync">Syncing events to your calendar</a></li>
+          <li><a href="#s5-yaleconnect">Yale Connect</a></li>
+          <li><a href="#s5-slack">Slack</a></li>
+          <li><a href="#s5-slacknorms">Slack Norms &amp; Community Standards</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s6"><span class="n">06</span>Printing</a>
+        <ul class="toc-sub">
+          <li><a href="#s6-addfunds">Add funds</a></li>
+          <li><a href="#s6-submit">Submit a print job</a></li>
+          <li><a href="#s6-release">Release your print</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s7"><span class="n">07</span>Room &amp; Space Booking</a>
+        <ul class="toc-sub">
+          <li><a href="#s7-booking">Booking flow</a></li>
+          <li><a href="#s7-managing">Managing &amp; checking in</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s8"><span class="n">08</span>Video Conferencing</a>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s9"><span class="n">09</span>IT Equipment &amp; Rentals</a>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s10"><span class="n">10</span>Campus Life &amp; Transit Apps</a>
+        <ul class="toc-sub">
+          <li><a href="#s10-pwg">Yale Rec App — PWG access</a></li>
+          <li><a href="#s10-mta">MTA TrainTime app</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s11"><span class="n">11</span>Bookmarks — Master Links List</a>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s12"><span class="n">12</span>Getting Help — Contact &amp; Escalation</a>
+      </div>
+    
+    </nav>
+  </aside>
+
+  <button id="toc-reopen" class="toc-reopen-btn" aria-label="Show table of contents" title="Show On This Page">☰ Contents</button>
+
+  <div class="content-column">
 
   <div class="msection" style="padding-bottom:0;">
     <p>Information aggregated below and more can be found in the <a href="https://yalesom.atlassian.net/wiki/spaces/SC/overview" target="_blank" rel="noopener">SOM IT Service Catalog</a>. For IT questions, please reach out to <a href="#s12">SOM IT</a>.</p>
+    <p id="filter-status" style="display:none; font-family:var(--font-mono); font-size:13px; color:var(--yale); background:var(--yale-mist); border:1px solid #D6E3EE; border-radius:8px; padding:8px 14px; margin-top:-4px;"></p>
   </div>
 
   <div class="msection">
@@ -408,6 +616,79 @@
       </tbody>
     </table>
   </div>
+
+  <details class="toc">
+    <summary><span class="label">On This Page</span></summary>
+    <div class="toc-grid">
+      <div class="toc-group">
+        <a class="toc-main" href="#s1"><span class="n">01</span>Day 1 Setup Checklist</a>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s2"><span class="n">02</span>Accounts, Login &amp; Security</a>
+        <ul class="toc-sub">
+          <li><a href="#s2-netid">NetID &amp; password</a></li>
+          <li><a href="#s2-yaleid">YaleID &amp; UPI</a></li>
+          <li><a href="#s2-duo">Duo (two-factor authentication)</a></li>
+          <li><a href="#s2-vpn">VPN (Cisco AnyConnect)</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s3"><span class="n">03</span>Email, Office &amp; File Storage</a>
+        <ul class="toc-sub">
+          <li><a href="#s3-outlook">Install Outlook</a></li>
+          <li><a href="#s3-office">Install Office</a></li>
+          <li><a href="#s3-onedrive">Navigating OneDrive / SharePoint</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s4"><span class="n">04</span>Course Bidding</a>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s5"><span class="n">05</span>Campus Community Platforms</a>
+        <ul class="toc-sub">
+          <li><a href="#s5-campusgroups">CampusGroups</a></li>
+          <li><a href="#s5-sync">Syncing events to your calendar</a></li>
+          <li><a href="#s5-yaleconnect">Yale Connect</a></li>
+          <li><a href="#s5-slack">Slack</a></li>
+          <li><a href="#s5-slacknorms">Slack Norms &amp; Community Standards</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s6"><span class="n">06</span>Printing</a>
+        <ul class="toc-sub">
+          <li><a href="#s6-addfunds">Add funds</a></li>
+          <li><a href="#s6-submit">Submit a print job</a></li>
+          <li><a href="#s6-release">Release your print</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s7"><span class="n">07</span>Room &amp; Space Booking</a>
+        <ul class="toc-sub">
+          <li><a href="#s7-booking">Booking flow</a></li>
+          <li><a href="#s7-managing">Managing &amp; checking in</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s8"><span class="n">08</span>Video Conferencing</a>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s9"><span class="n">09</span>IT Equipment &amp; Rentals</a>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s10"><span class="n">10</span>Campus Life &amp; Transit Apps</a>
+        <ul class="toc-sub">
+          <li><a href="#s10-pwg">Yale Rec App — PWG access</a></li>
+          <li><a href="#s10-mta">MTA TrainTime app</a></li>
+        </ul>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s11"><span class="n">11</span>Bookmarks — Master Links List</a>
+      </div>
+      <div class="toc-group">
+        <a class="toc-main" href="#s12"><span class="n">12</span>Getting Help — Contact &amp; Escalation</a>
+      </div>
+    </div>
+  </details>
 
   <!-- ===================== SECTION 1: DAY 1 CHECKLIST ===================== -->
   <section class="card" data-m="M0 M1" id="s1">
@@ -428,13 +709,13 @@
   <section class="card" data-m="M0 M3" id="s2">
     <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Accounts, Login &amp; Security</h2></div>
 
-    <h3 class="sub">NetID &amp; password</h3>
+    <h3 class="sub" id="s2-netid">NetID &amp; password</h3>
     <p>Your NetID is your master login for nearly every Yale system — email, Canvas, CampusGroups, printing, EMS, and more. If you haven't activated it yet, do this as the first step!</p>
 
-    <h3 class="sub">YaleID &amp; UPI</h3>
+    <h3 class="sub" id="s2-yaleid">YaleID &amp; UPI</h3>
     <p>These are different from your NetID — a YaleID is a separate identification number, and a UPI is your Universal Person Identifier. You'll be able to pick up your student ID card starting <strong>Friday, August 14</strong>.</p>
 
-    <h3 class="sub">Duo (two-factor authentication)</h3>
+    <h3 class="sub" id="s2-duo">Duo (two-factor authentication)</h3>
     <p>Yale requires Duo on top of your NetID password for most systems.</p>
     <ul class="bullets">
       <li>Registering your first device: <a href="https://yalesom.atlassian.net/wiki/spaces/SC/pages/42308376/How+to+Opt-in+to+DUO+Everywhere+and+Register+your+First+Device" target="_blank" rel="noopener">How to opt in to Duo Everywhere</a></li>
@@ -442,7 +723,7 @@
       <li>iOS blank/gray screen: <a href="https://yalesom.atlassian.net/wiki/spaces/SC/pages/42309222/Duo+login+box+blank+gray+on+iOS" target="_blank" rel="noopener">Fix guide</a></li>
     </ul>
 
-    <h3 class="sub">VPN (Cisco AnyConnect)</h3>
+    <h3 class="sub" id="s2-vpn">VPN (Cisco AnyConnect)</h3>
     <p>To access some specific resources (including the course auction when bidding for classes off-campus), download the Cisco AnyConnect VPN. <a href="https://yalesom.atlassian.net/wiki/spaces/SC/pages/42304499/Yale+Cisco+AnyConnect+VPN+Access" target="_blank" rel="noopener">Setup instructions here</a> — use your NetID to log in.</p>
   </section>
 
@@ -450,7 +731,7 @@
   <section class="card" data-m="M1 M2 M3" id="s3">
     <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Email, Office &amp; File Storage</h2></div>
 
-    <h3 class="sub">Install Outlook</h3>
+    <h3 class="sub" id="s3-outlook">Install Outlook</h3>
     <p><strong>Desktop (Windows/Mac):</strong></p>
     <ol class="steps">
       <li>Open Outlook</li>
@@ -465,7 +746,7 @@
       <li>Enter your Yale email and NetID password</li>
     </ol>
 
-    <h3 class="sub">Install Office</h3>
+    <h3 class="sub" id="s3-office">Install Office</h3>
     <ol class="steps">
       <li>Go to the Office Apps &amp; Downloads page on Microsoft 365 (must be logged into Yale Outlook)</li>
       <li>Click "Install Office" — download on up to 5 devices (PCs, Macs, tablets, phones)</li>
@@ -481,7 +762,7 @@
       <img src="assets/image4.jpg" alt="Office installer opening">
     </div>
 
-    <h3 class="sub">Navigating OneDrive / SharePoint</h3>
+    <h3 class="sub" id="s3-onedrive">Navigating OneDrive / SharePoint</h3>
     <p><strong>SharePoint</strong> is a shared-file platform, best for learning team documents or club-related tasks that need group-level access separate from your personal OneDrive. Access it at <code>yaleedu.sharepoint.com</code>.</p>
     <p><strong>OneDrive</strong> is your personal cloud storage, free with your Yale Office 365 account. Save files there to reach them from any device and keep an automatic backup of your work. Access it by logging into <code>login.microsoftonline.com</code> with your Yale email, then selecting OneDrive from the app launcher (top-left grid icon).</p>
   </section>
@@ -496,7 +777,7 @@
   <section class="card" data-m="M1 M2" id="s5">
     <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Campus Community Platforms</h2></div>
 
-    <h3 class="sub">CampusGroups</h3>
+    <h3 class="sub" id="s5-campusgroups">CampusGroups</h3>
     <p class="lede">Your go-to page for most SOM social and guest-speaker events — everything from the annual Business &amp; Society musical to weekly club meetings to guest talks lives here, plus club sites.</p>
     <ol class="steps">
       <li>Go to the CampusGroups login page and sign in with your Yale NetID</li>
@@ -517,7 +798,7 @@
       <img src="assets/image41.jpg" alt="CampusGroups waitlist">
     </div>
 
-    <h3 class="sub">Syncing events to your calendar</h3>
+    <h3 class="sub" id="s5-sync">Syncing events to your calendar</h3>
     <ol class="steps">
       <li>Log into <code>groups.som.yale.edu</code> with your NetID</li>
       <li>Scroll to the bottom of your dashboard to "Synchronize my Events"</li>
@@ -532,13 +813,13 @@
       <img src="assets/image7.jpg" alt="Calendar sync confirmation">
     </div>
 
-    <h3 class="sub">Yale Connect</h3>
+    <h3 class="sub" id="s5-yaleconnect">Yale Connect</h3>
     <p>In addition to CampusGroups (for SOM events), check out <a href="https://yaleconnect.yale.edu/home_login" target="_blank" rel="noopener">Yale Connect</a> (web and mobile app) for events outside SOM across Yale campus.</p>
 
-    <h3 class="sub">Slack</h3>
+    <h3 class="sub" id="s5-slack">Slack</h3>
     <p>SOM relies on Slack heavily to make announcements about social events, club events, and student government updates.</p>
 
-    <h3 class="sub">Slack Norms &amp; Community Standards</h3>
+    <h3 class="sub" id="s5-slacknorms">Slack Norms &amp; Community Standards</h3>
     <p>Slack gets "noisy" quickly, especially during busy periods in the year. The following shared habits keep it helpful, searchable, and respectful of everyone's attention.</p>
     <ul class="bullets">
       <li><strong>Post to one channel</strong> — the smallest relevant audience and topic. Use your program's private channel (e.g. <code>#2028-mba</code>) for messages relevant only to your class year and program; <code>#4055-mba</code> for messages relevant specifically and only to both class years of the full-time MBA programs; <code>#som-all-programs</code> for messages (not events) genuinely relevant to all SOM programs; and <code>#som-events</code> for events intended for the broader SOM community. Use club, cohort, or social channels when the audience is narrower.</li>
@@ -569,7 +850,7 @@
     <div class="sec-head"><span class="sec-num">06</span><h2 class="sec-title">Printing</h2></div>
     <p>Print to one shared queue, then release the job at whichever compatible printer you're standing at — including many Yale printers outside SOM. Nothing prints until you release it. <a href="https://blueprint.yale.edu/student-printing/quick-start" target="_blank" rel="noopener">Quick-start guide →</a></p>
 
-    <h3 class="sub">Add funds</h3>
+    <h3 class="sub" id="s6-addfunds">Add funds</h3>
     <ol class="steps">
       <li>Go to the <a href="https://blueprint.yale.edu/webprint" target="_blank" rel="noopener">PaperCut Web Print portal</a> and log in with your NetID/password</li>
       <li>On the dashboard, click "Adding Funds" (you may need to log in again)</li>
@@ -579,7 +860,7 @@
     </ol>
     <div class="callout accent"><span class="ic">💵</span> Balances under $5 aren't refundable, but can be transferred to another student.</div>
 
-    <h3 class="sub">Submit a print job</h3>
+    <h3 class="sub" id="s6-submit">Submit a print job</h3>
     <ol class="steps">
       <li>From the PaperCut homepage, click "Web Print"</li>
       <li>Click "Submit a Job"</li>
@@ -588,7 +869,7 @@
       <li>Upload your file(s) and submit</li>
     </ol>
 
-    <h3 class="sub">Release your print</h3>
+    <h3 class="sub" id="s6-release">Release your print</h3>
     <ol class="steps">
       <li>Once your job shows "Held in a queue," walk to any compatible printer</li>
       <li>Tap your ID card on the reader, or log in manually with your NetID, to release it</li>
@@ -616,7 +897,7 @@
       <li><strong>Interview rooms:</strong> intended for formal recruiting only; located on the 1st floor.</li>
     </ul>
 
-    <h3 class="sub">Booking flow</h3>
+    <h3 class="sub" id="s7-booking">Booking flow</h3>
     <ol class="steps">
       <li>Go to the <a href="https://yalesom.emscloudservice.com/web/Default.aspx" target="_blank" rel="noopener">Yale SOM EMS website</a>, scroll to the bottom, and click "Sign In"</li>
       <li>Log in with your NetID</li>
@@ -629,7 +910,7 @@
       <li>Click "Create Reservation"</li>
     </ol>
 
-    <h3 class="sub">Managing &amp; checking in</h3>
+    <h3 class="sub" id="s7-managing">Managing &amp; checking in</h3>
     <ul class="bullets">
       <li>View or cancel bookings under "My Events"</li>
     </ul>
@@ -674,7 +955,7 @@
   <section class="card" data-m="M0" id="s10">
     <div class="sec-head"><span class="sec-num">10</span><h2 class="sec-title">Campus Life &amp; Transit Apps</h2></div>
 
-    <h3 class="sub">Yale Rec App — PWG access before your ID card arrives</h3>
+    <h3 class="sub" id="s10-pwg">Yale Rec App — PWG access before your ID card arrives</h3>
     <ol class="steps">
       <li>Search the App Store/Google Play for "Yale Campus Recreation" and install it</li>
       <li>Open the app; tap the barcode icon labeled "Yale Rec ID" in the top-left corner</li>
@@ -690,7 +971,7 @@
       <img src="assets/image11.jpg" alt="Yale NetID CAS login">
     </div>
 
-    <h3 class="sub">MTA TrainTime app — Metro-North tickets</h3>
+    <h3 class="sub" id="s10-mta">MTA TrainTime app — Metro-North tickets</h3>
     <p><strong>Method A (by itinerary):</strong></p>
     <ol class="steps">
       <li>Open the Trips tab</li>
@@ -763,6 +1044,7 @@
     </div>
   </section>
 
+</div>
 </main>
 
 <div id="lightbox"><img id="lightbox-img" src="" alt=""></div>
@@ -774,27 +1056,48 @@
 
 <script>
 (function(){
+  // ---- Sidebar TOC collapse/expand ----
+  var toggleBtn = document.getElementById('toc-toggle');
+  var reopenBtn = document.getElementById('toc-reopen');
+  function setSidebarCollapsed(collapsed){
+    document.body.classList.toggle('sidebar-collapsed', collapsed);
+    try{ localStorage.setItem('somGuideTocCollapsed', collapsed ? '1' : '0'); }catch(e){}
+  }
+  if(toggleBtn){ toggleBtn.addEventListener('click', function(){ setSidebarCollapsed(true); }); }
+  if(reopenBtn){ reopenBtn.addEventListener('click', function(){ setSidebarCollapsed(false); }); }
+  try{
+    if(localStorage.getItem('somGuideTocCollapsed') === '1'){ setSidebarCollapsed(true); }
+  }catch(e){}
+
   // ---- Milestone filter ----
-  var chips = document.querySelectorAll('.chip');
-  var sections = document.querySelectorAll('section.card');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.card'));
+  var status = document.getElementById('filter-status');
   chips.forEach(function(chip){
     chip.addEventListener('click', function(){
       chips.forEach(function(c){ c.classList.remove('active'); });
       chip.classList.add('active');
       var m = chip.getAttribute('data-m');
+      var shown = 0;
       sections.forEach(function(sec){
-        if(m === 'all'){ sec.classList.remove('dimmed'); return; }
+        if(m === 'all'){ sec.classList.remove('dimmed'); shown++; return; }
         var tags = (sec.getAttribute('data-m') || '').split(' ');
-        if(tags.indexOf(m) !== -1){ sec.classList.remove('dimmed'); }
+        if(tags.indexOf(m) !== -1){ sec.classList.remove('dimmed'); shown++; }
         else{ sec.classList.add('dimmed'); }
       });
+      if(m === 'all'){
+        status.style.display = 'none';
+      } else {
+        status.style.display = 'block';
+        status.textContent = 'Showing ' + shown + ' of ' + sections.length + ' sections tagged "' + chip.textContent.trim() + '" — click "All" to see everything again.';
+      }
     });
   });
 
   // ---- Lightbox ----
   var lightbox = document.getElementById('lightbox');
   var lightboxImg = document.getElementById('lightbox-img');
-  document.querySelectorAll('.shots img').forEach(function(img){
+  Array.prototype.slice.call(document.querySelectorAll('.shots img')).forEach(function(img){
     img.addEventListener('click', function(){
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt;
